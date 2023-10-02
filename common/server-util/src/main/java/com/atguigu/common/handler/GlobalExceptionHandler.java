@@ -2,6 +2,7 @@ package com.atguigu.common.handler;
 
 import com.atguigu.common.execption.GuiguException;
 import com.atguigu.common.result.Result;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result error(Exception e){
         e.printStackTrace();
-        return Result.fail();
+        return Result.fail().message("全局异常处理");
     }
     @ExceptionHandler(ArithmeticException.class)
     @ResponseBody
@@ -31,5 +32,15 @@ public class GlobalExceptionHandler {
     public Result error(GuiguException e){
         e.printStackTrace();
         return Result.fail().message(e.getMessage()).code(e.getCode());
+    }
+    /**
+     * spring security异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public Result error(AccessDeniedException e) throws AccessDeniedException {
+        return Result.fail().code(205).message("没有访问权限");
     }
 }

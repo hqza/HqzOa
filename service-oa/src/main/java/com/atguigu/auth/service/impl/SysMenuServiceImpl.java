@@ -38,6 +38,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Autowired
     private SysRoleMenuService sysRoleMenuService;
 
+    @Autowired
+    private SysMenuService sysMenuMapper;
 
     @Override
     public List<SysMenu> findNodes() {
