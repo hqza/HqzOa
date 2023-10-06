@@ -8,5 +8,14 @@
       <jdbc-url>jdbc:mysql://47.99.65.46:3306</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="service-oa/Hibernate" uuid="92788881-a826-459f-9018-605d60e4ca69">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://47.99.65.46:3306/guigu-oa?serverTimezone=GMT%2B8&amp;useSSL=false&amp;characterEncoding=utf-8</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

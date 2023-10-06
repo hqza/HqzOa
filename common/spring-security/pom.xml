@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.atguigu</groupId>
+        <groupId>com.athqz</groupId>
         <artifactId>common</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.atguigu</groupId>
+            <groupId>com.athqz</groupId>
             <artifactId>common-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -22,7 +22,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.atguigu</groupId>
+            <groupId>com.athqz</groupId>
             <artifactId>model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
