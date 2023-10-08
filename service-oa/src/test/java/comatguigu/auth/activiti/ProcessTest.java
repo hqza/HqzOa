@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.InputStream;
 import java.util.List;
+import java.util.zip.ZipInputStream;
 
 @SpringBootTest(classes = ServiceAuthApplication.class)
 public class ProcessTest {
@@ -44,7 +46,24 @@ public class ProcessTest {
         System.out.println(deploy.getId());
         System.out.println(deploy.getName());
     }
+    @Test
+    public void deployProcessByZip() {
+        // 定义zip输入流
+        InputStream inputStream = this
+                .getClass()
+                .getClassLoader()
+                .getResourceAsStream(
+                        "process/jiaban.zip");
+        ZipInputStream zipInputStream = new ZipInputStream(inputStream);
 
+        // 流程部署
+        Deployment deployment = repositoryService.createDeployment()
+                .addZipInputStream(zipInputStream)
+                .name("请假申请流程")
+                .deploy();
+        System.out.println("流程部署id：" + deployment.getId());
+        System.out.println("流程部署名称：" + deployment.getName());
+    }
     @Test
     public void startUpProcess() {
         //创建流程实例,我们需要知道流程定义的key

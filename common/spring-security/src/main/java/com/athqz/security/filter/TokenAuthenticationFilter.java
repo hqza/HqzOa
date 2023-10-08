@@ -4,6 +4,7 @@ import com.athqz.common.jwt.JwtHelper;
 import com.athqz.common.result.ResponseUtil;
 import com.athqz.common.result.Result;
 import com.athqz.common.result.ResultCodeEnum;
+import com.athqz.security.custom.LoginUserInfoHelper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -64,6 +65,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             String useruame = JwtHelper.getUsername(token);
             logger.info("useruame:"+useruame);
             if (!StringUtils.isEmpty(useruame)) {
+                //修改，封装成工具类
+                LoginUserInfoHelper.setUserId(JwtHelper.getUserId(token));
+                LoginUserInfoHelper.setUsername(useruame);
+
                 //通过用户名称从redis获得数据
                 String authString = (String) redisTemplate.opsForValue().get(useruame);
                 //把redis获取字符串权限数据转换成要求集合类型

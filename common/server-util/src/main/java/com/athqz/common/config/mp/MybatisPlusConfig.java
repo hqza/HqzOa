@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration      //配置类
 //@MapperScan("com.athqz.auth.mapper")      /*扫描*/
-@MapperScan(basePackages = {"com.athqz.auth.mapper","com.athqz.process.mapper"})
+@MapperScan(basePackages = {"com.athqz.auth.mapper","com.athqz.process.mapper","com.athqz.wechat.mapper"})
 public class MybatisPlusConfig {
 
     /**

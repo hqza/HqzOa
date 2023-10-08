@@ -70,7 +70,7 @@ public class OaProcessTemplateServiceImpl extends ServiceImpl<OaProcessTemplateM
         processTemplateMapper.updateById(processTemplate);
 
         //TODO 部署流程定义，后续完善
-        if(StringUtils.isEmpty(processTemplate.getProcessDefinitionPath())){
+        if(!StringUtils.isEmpty(processTemplate.getProcessDefinitionPath())){
             oaProcessService.deployByZip(processTemplate.getProcessDefinitionPath());
         }
     }
