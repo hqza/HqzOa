@@ -10,7 +10,7 @@ public enum ResultCodeEnum {
     DATA_ERROR(204, "数据异常"),
     LOGIN_AUTH(208, "未登陆"),
     PERMISSION(209, "没有权限"),
-    LOGIN_MOBLE_ERROR(104,"认证失败")
+    LOGIN_MOBLE_ERROR(208,"认证失败")
     ;
 
     private Integer code;

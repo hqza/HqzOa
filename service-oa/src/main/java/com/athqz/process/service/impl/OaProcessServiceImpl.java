@@ -17,6 +17,7 @@ import com.athqz.vo.process.ApprovalVo;
 import com.athqz.vo.process.ProcessFormVo;
 import com.athqz.vo.process.ProcessQueryVo;
 import com.athqz.vo.process.ProcessVo;
+import com.athqz.wechat.service.MessageService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -66,6 +67,9 @@ import java.util.zip.ZipInputStream;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class OaProcessServiceImpl extends ServiceImpl<OaProcessMapper, Process> implements OaProcessService {
 
+
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private OaProcessTemplateService processTemplateService;
@@ -158,7 +162,7 @@ public class OaProcessServiceImpl extends ServiceImpl<OaProcessMapper, Process> 
                 SysUser user = sysUserService.getByUsername(task.getAssignee());
                 assigneeList.add(user.getName());
                 //6推送一个消息
-                //推送消息给下一个审批人，后续完善
+                messageService.pushPendingMessage(process.getId(), sysUser.getId(), task.getId());
             }
             process.setDescription("等待" + StringUtils.join(assigneeList.toArray(), ",") + "审批");
         }
@@ -276,7 +280,7 @@ public class OaProcessServiceImpl extends ServiceImpl<OaProcessMapper, Process> 
                 SysUser sysUser = sysUserService.getByUsername(task.getAssignee());
                 assigneeList.add(sysUser.getName());
 
-                //推送消息给下一个审批人
+                //推送消息给下一个审批人【微信公众号】
             }
             process.setDescription("等待" + StringUtils.join(assigneeList.toArray(), ",") + "审批");
             process.setStatus(1);
@@ -290,6 +294,7 @@ public class OaProcessServiceImpl extends ServiceImpl<OaProcessMapper, Process> 
             }
         }
         //推送消息给申请人
+        messageService.pushProcessedMessage(process.getId(), process.getUserId(), approvalVo.getStatus());
         this.updateById(process);
     }
 
